@@ -13,7 +13,10 @@ function setFeedback(text, type) {
 }
 
 function render(tasks) {
-    taskList.innerHTML = "";
+    taskList.innerHTML = ""
+    
+    updateProgress(tasks || []);
+;
 
     if (!tasks || tasks.length === 0) {
         msg.textContent = "No hay tareas.";
@@ -73,9 +76,11 @@ async function getTasks() {
         if (!res.ok) throw new Error("No se pudo obtener /tasks");
         const tasks = await res.json();
         render(tasks);
+        updateProgress(tasks);
     } catch (err) {
         msg.textContent = "No se pudieron cargar las tareas.";
         setFeedback(String(err.message || err), "error");
+        updateProgress([]);
     }
 }
 
@@ -134,6 +139,16 @@ async function completeTask(id, completed) {
     } catch (err) {
         setFeedback(String(err.message || err), "error");
     }
+}
+
+function updateProgress(tasks) {
+  const total = tasks.length;
+  const completed = tasks.filter(t => t.completed).length;
+
+  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("progressText").textContent = percent + "%";
 }
 
 addButton.addEventListener("click", () => {
