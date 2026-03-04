@@ -26,6 +26,7 @@ h1 {
 .row {
     display: flex;
     gap: 10px;
+    width: 100%;
 }
 
 input[type="text"] {
@@ -204,8 +205,14 @@ li {
         padding: 3px 6px;
     }
     #addButton {
-        padding: 12px 16px;
+        padding: 10px 16px;
         font-size: x-small;
+        margin: auto;
+    }
+    .row {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
     }
 
     li{
