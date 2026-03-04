@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="styles.css" />    
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Task Manager</h1>
+
+      <div class="row">
+        <input id="taskTitle" type="text" placeholder="Escribe una tarea..." />
+        <button id="addButton">Agregar</button>
+      </div>
+
+      <div id="msg" class="loading">Cargando tareas...</div>
+
+      <ul id="taskList"></ul>
+                <div id="errorMsg"></div>
+    </div>
+  </div>
+
+
+<script src="scripts.js"></script>
+</body>
+</html>

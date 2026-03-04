@@ -1,0 +1,148 @@
+const API_BASE = "http://localhost:3000/tasks";
+
+const taskTitleEl = document.getElementById("taskTitle");
+const addButton = document.getElementById("addButton");
+const taskList = document.getElementById("taskList");
+const msg = document.getElementById("msg");
+const errorMsg = document.getElementById("errorMsg");
+
+function setFeedback(text, type) {
+    errorMsg.className = type ? (type === "error" ? "error" : "completed") : "";
+    errorMsg.textContent = text || "";
+    if (text) setTimeout(() => { errorMsg.textContent = ""; errorMsg.className = ""; }, 2500);
+}
+
+function render(tasks) {
+    taskList.innerHTML = "";
+
+    if (!tasks || tasks.length === 0) {
+        msg.textContent = "No hay tareas.";
+        return;
+    }
+
+    const completedCount = tasks.filter(task => task.completed).length;
+    const pendingCount = tasks.length - completedCount;
+    msg.textContent = `Tareas: ${tasks.length} (${completedCount} completadas, ${pendingCount} pendientes)`;
+
+    for (const task of tasks) {
+        const li = document.createElement("li");
+
+        const left = document.createElement("div");
+        left.className = "left";
+
+        const title = document.createElement("span");
+        title.className = "title";
+        title.textContent = `${task.title}`;
+
+        const state = document.createElement("span");
+        state.className = `state ${String(task.completed)}`;
+        state.textContent = task.completed ? "Completada" : "Pendiente";
+
+        left.appendChild(title);
+        left.appendChild(state);
+
+        const checkbox = document.createElement("input");
+
+        checkbox.className = "checkbox";
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+
+        checkbox.addEventListener("change", async () => {
+            await completeTask(task.id, checkbox.checked);
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete";
+        deleteButton.textContent = "Eliminar";
+        deleteButton.addEventListener("click", async () => {
+            await deleteTask(task.id);
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(left);
+        li.appendChild(deleteButton);
+        taskList.appendChild(li);
+    }
+}
+
+async function getTasks() {
+    msg.textContent = "Cargando tareas...";
+    try {
+        const res = await fetch(API_BASE);
+        if (!res.ok) throw new Error("No se pudo obtener /tasks");
+        const tasks = await res.json();
+        render(tasks);
+    } catch (err) {
+        msg.textContent = "No se pudieron cargar las tareas.";
+        setFeedback(String(err.message || err), "error");
+    }
+}
+
+async function addTask(title) {
+    addButton.disabled = true;
+    try {
+        const res = await fetch(API_BASE, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, completed: false })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            throw new Error(data?.error || "Error creando tarea");
+        }
+
+        taskTitleEl.value = "";
+        setFeedback("Tarea agregada", "completed");
+        await getTasks();
+    } catch (err) {
+        setFeedback(String(err.message || err), "error");
+    } finally {
+        addButton.disabled = false;
+    }
+}
+
+async function deleteTask(id) {
+    try {
+        const res = await fetch(`${API_BASE}/${id}`, { method: "DELETE" });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data?.error || "Error eliminando tarea");
+        setFeedback("Tarea eliminada", "completed");
+        await getTasks();
+    } catch (err) {
+        setFeedback(String(err.message || err), "error");
+    }
+}
+
+async function completeTask(id, completed) {
+    try {
+        const res = await fetch(`${API_BASE}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ completed })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data?.error || "Error actualizando tarea");
+
+        setFeedback("Estado actualizado", "completed");
+        await getTasks();
+
+    } catch (err) {
+        setFeedback(String(err.message || err), "error");
+    }
+}
+
+addButton.addEventListener("click", () => {
+    const title = taskTitleEl.value.trim();
+    if (!title) return setFeedback("Escribe un título primero.", "error");
+    addTask(title);
+});
+
+taskTitleEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") addButton.click();
+});
+
+getTasks();

@@ -1,0 +1,167 @@
+body {
+    font-family: system-ui, Arial, sans-serif;
+    margin: 0;
+    background: #1C3041;
+    color: #e2e8f0;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background: #1C3041;
+    border: 2px solid #7A8B99;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: #0b1220 0px 8px 8px, #0b1220 0px 8px 8px;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 12px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #0b1220;
+    color: #e2e8f0;
+    outline: none;
+}
+
+button {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #002642;
+    color: white;
+    cursor: pointer;
+}
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #94a3b8;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  margin-right: 10px;
+  background-color: white;
+}
+
+.checkbox:hover {
+  border-color: #2563eb;
+}
+
+.checkbox:checked {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.checkbox:checked::after {
+  content: "✔";
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+ul {
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    background: #0b1220;
+    border: 4px solid #1f2937;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    font-weight: 600;
+}
+
+.state {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid #334155;
+}
+
+.state.false {
+    background: rgba(239, 68, 68, .12);
+    color: #89043D;
+}
+
+.state.true {
+    background: rgba(34, 197, 94, .12);
+    color: #4CB944;
+}
+
+.delete {
+    background: #83043A;
+    border-color: #7f1d1d;
+}
+
+.delete:hover {
+    background: #a50e2b;
+}
+
+.loading {
+    color: #94a3b8;
+    margin-top: 12px;
+}
+
+.error {
+    width: auto;
+    text-align: center;
+    color: red;
+    margin-top: 10px;
+    padding: 8px 10px;
+}
+
+.completed {
+    width: auto;
+    text-align: center;
+    color: #4CB944;
+    margin-top: 10px;
+    padding: 8px 10px;
+}
+
+#addButton {
+    padding: 16px 20px;
+}
+
+#addButton:hover {
+    background: #00477A;
+}
