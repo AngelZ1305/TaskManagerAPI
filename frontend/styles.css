@@ -159,6 +159,7 @@ li {
 }
 
 #addButton {
+    margin-right: auto;
     padding: 16px 20px;
 }
 
