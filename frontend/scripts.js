@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000/tasks";
+const API_BASE = "https://taskmanagerapi-sxsn.onrender.com/tasks";
 
 const taskTitleEl = document.getElementById("taskTitle");
 const addButton = document.getElementById("addButton");
