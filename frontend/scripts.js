@@ -1,6 +1,6 @@
 const API_BASE = "https://taskmanagerapi-sxsn.onrender.com/tasks";
 
-const taskTitleEl = document.getElementById("taskTitle");
+const taskTitle = document.getElementById("taskTitle");
 const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 const msg = document.getElementById("msg");
@@ -20,6 +20,7 @@ function render(tasks) {
         return;
     }
 
+ 
     const completedCount = tasks.filter(task => task.completed).length;
     const pendingCount = tasks.length - completedCount;
     msg.textContent = `Tareas: ${tasks.length} (${completedCount} completadas, ${pendingCount} pendientes)`;
@@ -92,7 +93,7 @@ async function addTask(title) {
             throw new Error(data?.error || "Error creando tarea");
         }
 
-        taskTitleEl.value = "";
+        taskTitle.value = "";
         setFeedback("Tarea agregada", "completed");
         await getTasks();
     } catch (err) {
@@ -136,12 +137,13 @@ async function completeTask(id, completed) {
 }
 
 addButton.addEventListener("click", () => {
-    const title = taskTitleEl.value.trim();
+    const title = taskTitle.value.trim();
     if (!title) return setFeedback("Escribe un título primero.", "error");
+    if (title.length > 50) return setFeedback("El título no puede tener más de 50 caracteres.", "error");
     addTask(title);
 });
 
-taskTitleEl.addEventListener("keydown", (e) => {
+taskTitle.addEventListener("keydown", (e) => {
     if (e.key === "Enter") addButton.click();
 });
 
