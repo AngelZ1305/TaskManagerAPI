@@ -7,34 +7,34 @@ El proyecto está desplegado en Render y conectado a GitHub, por lo que cualquie
 Demo
 Frontend
 
-https://taskmanagerapi-front.onrender.com/
+- https://taskmanagerapi-front.onrender.com/
 
 Backend API
 
-https://taskmanagerapi-sxsn.onrender.com/tasks
+- https://taskmanagerapi-sxsn.onrender.com/tasks
 
 Tecnologías utilizadas
 Backend
 
-Node.js
+- Node.js
 
-Express
+- Express
 
-CORS
+- CORS
 
-Frontend
+- Frontend
 
-HTML
+- HTML
 
-CSS
+- CSS
 
-JavaScript (Vanilla)
+- JavaScript (Vanilla)
 
 Infraestructura
 
-Render (hosting)
+- Render (hosting)
 
-GitHub (control de versiones y despliegue automático)
+- GitHub (control de versiones y despliegue automático)
 
 Arquitectura del proyecto
 
@@ -49,7 +49,7 @@ El frontend realiza peticiones HTTP a la API para manipular las tareas.
 El backend mantiene las tareas en memoria, por lo que los datos se reinician cuando el servidor se reinicia.
 
 API Endpoints
-Base URL
+- Base URL
 https://taskmanagerapi-sxsn.onrender.com/tasks
 Obtener todas las tareas
 GET /tasks
@@ -61,14 +61,14 @@ Ejemplo de respuesta
     "completed": false
   }
 ]
-Crear una nueva tarea
+- Crear una nueva tarea
 POST /tasks
 Body
 {
   "title": "Nueva tarea",
   "completed": false
 }
-Actualizar estado de una tarea
+- Actualizar estado de una tarea
 PUT /tasks/:id
 
 Permite cambiar el estado de completado de una tarea.
@@ -77,24 +77,24 @@ Ejemplo
 {
   "completed": true
 }
-Eliminar una tarea
+- Eliminar una tarea
 DELETE /tasks/:id
 
 Elimina la tarea correspondiente al id.
 
 Características
 
-Crear tareas
+- Crear tareas
 
-Marcar tareas como completadas
+- Marcar tareas como completadas
 
-Eliminar tareas
+- Eliminar tareas
 
-Feedback visual para el usuario
+- Feedback visual para el usuario
 
-Mensaje cuando no hay tareas
+- Mensaje cuando no hay tareas
 
-Conteo de tareas completadas y pendientes
+- Conteo de tareas completadas y pendientes
 
 Despliegue
 
