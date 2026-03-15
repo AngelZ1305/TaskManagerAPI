@@ -195,7 +195,14 @@ li {
   border-radius: 999px;
   transition: width .25s ease;
 }
-
+#email, #password {
+    margin-top: 20px;
+    padding: 12px 12px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    background-color: #0b1220;
+}
 #addButton {
     margin-right: auto;
     padding: 16px 20px;
