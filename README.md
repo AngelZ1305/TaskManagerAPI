@@ -111,3 +111,49 @@ Windows
 <img width="1919" height="911" alt="image" src="https://github.com/user-attachments/assets/e68458f0-780b-4553-a25d-afb9ed141c05" /> <br>
 Móvil
 <br><img width="346" height="623" alt="image" src="https://github.com/user-attachments/assets/30cc8191-cd3d-4d45-8a9a-f3ddfb774137" />
+
+Checklist de configuración en Render
+Backend (Web Service)
+
+Directorio raíz: backend
+
+Comando de construcción:
+
+- npm install
+
+Comando de inicio:
+
+- npm start
+Variables de entorno
+
+Agregar en Render:
+
+- JWT_SECRET=<tu secreto>
+
+- CORS_ORIGIN=https://taskmanagerapi-front.onrender.com
+
+- NODE_ENV=production
+
+Nota:
+PORT lo proporciona Render automáticamente, no necesitas configurarlo.
+
+
+Notas importantes
+
+En producción, la cookie de autenticación ahora se configura con:
+
+- secure=true
+
+- sameSite=none
+
+- CORS_ORIGIN ahora puede aceptar múltiples orígenes, separados por comas.
+
+Ejemplo:
+
+- CORS_ORIGIN=https://taskmanagerapi-front.onrender.com,http://localhost:5500
+
+El origen de la API en el frontend cambia automáticamente:
+
+- Usa la URL de Render en producción
+
+- Usa localhost en desarrollo local
