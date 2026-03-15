@@ -241,6 +241,10 @@ li {
         font-size: 10px;
         padding: 3px 6px;
     }
+    #loginButton, #logoutButton {
+    margin-top: 20px;
+}
+
     #addButton {
         padding: 10px 16px;
         font-size: x-small;
