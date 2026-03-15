@@ -4,6 +4,13 @@ const jwt = require("jsonwebtoken");
 
 function createAuthRouter({ users, jwtSecret }) {
   const router = express.Router();
+  const isProduction = process.env.NODE_ENV === "production";
+  const cookieOptions = {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    maxAge: 60 * 60 * 1000
+  };
 
   router.post("/login", async (req, res) => {
     const { email, password } = req.body ?? {};
@@ -30,12 +37,7 @@ function createAuthRouter({ users, jwtSecret }) {
       { expiresIn: "1h" }
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 1000
-    });
+    res.cookie("token", token, cookieOptions);
 
     return res.json({
       message: "Login correcto",
@@ -47,8 +49,8 @@ function createAuthRouter({ users, jwtSecret }) {
   });
 
   router.post("/logout", (req, res) => {
-    res.clearCookie("token");
-    res.json({ message: "SesiÃ³n cerrada" });
+    res.clearCookie("token", cookieOptions);
+    res.json({ message: "Sesion cerrada" });
   });
 
   return router;

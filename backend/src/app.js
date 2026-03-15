@@ -17,7 +17,11 @@ const authenticateToken = createAuthenticateToken(JWT_SECRET);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: CORS_ORIGIN,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (CORS_ORIGIN.includes(origin)) return callback(null, true);
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true
 }));
 
