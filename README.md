@@ -49,8 +49,17 @@ El frontend realiza peticiones HTTP a la API para manipular las tareas.
 El backend mantiene las tareas en memoria, por lo que los datos se reinician cuando el servidor se reinicia.
 
 API Endpoints
+Los siguientes endpoints requieren autenticación:
+
+- GET /tasks
+
+- POST /tasks
+
+- DELETE /tasks/:id
+
 - Base URL
 https://taskmanagerapi-sxsn.onrender.com/tasks
+
 Obtener todas las tareas
 GET /tasks
 Ejemplo de respuesta
@@ -81,6 +90,33 @@ Ejemplo
 DELETE /tasks/:id
 
 Elimina la tarea correspondiente al id.
+
+Autenticación
+
+La API utiliza JWT almacenado en cookies para autenticar a los usuarios.
+Antes de utilizar los endpoints protegidos, es necesario iniciar sesión.
+
+Login
+
+Endpoint
+
+POST /login
+
+Body
+
+{
+  "email": "angel@gmail.com",
+  "password": "123456"
+}
+
+Respuesta exitosa
+
+{
+  "message": "Login successful"
+}
+
+Al iniciar sesión correctamente, el servidor genera un token JWT que se guarda en una cookie httpOnly.
+Esta cookie se enviará automáticamente en las siguientes solicitudes al backend.
 
 Características
 
