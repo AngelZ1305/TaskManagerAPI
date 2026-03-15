@@ -13,7 +13,7 @@ function createAuthenticateToken(jwtSecret) {
 
     jwt.verify(token, jwtSecret, (err, user) => {
       if (err) {
-        return res.status(403).json({ error: "Token invÃ¡lido o expirado" });
+        return res.status(403).json({ error: "Token invalido o expirado" });
       }
 
       req.user = user;

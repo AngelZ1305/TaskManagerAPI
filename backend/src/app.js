@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
+
 
 const users = require("./data/users");
 const tasksStore = require("./data/tasksStore");

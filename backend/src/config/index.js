@@ -1,6 +1,6 @@
-const PORT = process.env.PORT || 3000;
-const JWT_SECRET = process.env.JWT_SECRET || "clave_super_secreta_cambiala";
-const CORS_ORIGIN = "http://localhost:5500";
+const PORT = process.env.PORT;
+const JWT_SECRET = process.env.JWT_SECRET;
+const CORS_ORIGIN = process.env.CORS_ORIGIN;
 
 module.exports = {
   PORT,
