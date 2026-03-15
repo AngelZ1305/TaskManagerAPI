@@ -18,9 +18,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: (origin, callback) => {
+    const normalizedOrigin = String(origin || "").trim().replace(/\/+$/, "").toLowerCase();
+
     if (!origin) return callback(null, true);
-    if (CORS_ORIGIN.includes(origin)) return callback(null, true);
-    return callback(new Error("Not allowed by CORS"));
+    if (CORS_ORIGIN.length === 0) return callback(null, true);
+    if (CORS_ORIGIN.includes(normalizedOrigin)) return callback(null, true);
+
+    return callback(null, false);
   },
   credentials: true
 }));
