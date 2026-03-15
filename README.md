@@ -172,7 +172,8 @@ Agregar en Render:
 
 Nota:
 PORT lo proporciona Render automáticamente, no necesitas configurarlo.
-Para probar la app puedes usar 
+
+Para probar la app puedes usar:
 - Correo: angel@gmail.com
 - Contraseña: 123456
 
